@@ -7,7 +7,7 @@
 
 ### ***Description***
 #### This is project 1 in the Software Engineering Bootcamp Course with Generel Assembly. I will be creating a Snakes and Ladders game starting from today, using HTML, CSS, and JavaScript.. Let's Begin!
-### If you get on a square at the start of a ladder, you climb it and go increment up. IF you move on a snake's head you must decrement down it. In summary, you either go up or drop down through the numbers and the first person who reaches the 100th square will be the winner.
+### Snakes and Ladders game which you will be playing as moving between squares to win, if you get on a square at the start of a ladder, you climb it and go increment up. IF you move on a snake's head you must decrement down it. In summary, you either go up or drop down through the numbers and the first person who reaches the 100th square will be the winner.
 ***
 
 ### ***Technologies Used***
