@@ -7,11 +7,11 @@
 
 ### ***Description***
 #### This is project 1 in the Software Engineering Bootcamp Course with Generel Assembly. I will be creating a Snakes and Ladders game starting from today, using HTML, CSS, and JavaScript.. Let's Begin!
-#### The Snakes and Ladders game which you will be playing as moving between squares to win, if you get on a square at the start of a ladder, you climb it and go increment up. If you move on a snake's head you must decrement down it. In summary, you either go up or drop down through the numbers and the first person who reaches the 100th square will be the winner.
+#### Snakes and Ladders game which you will be playing as moving between squares to win, if you get on a square at the start of a ladder, you climb it and go increment up. If you move on a snake's head you must decrement down it. In summary, you either go up or drop down through the numbers and the first person who reaches the 100th square will be the winner.
 ***
 
 ### ***Technologies Used***
-* Vs Code
+* VS Code
 * Languages
   * HTML
   * CSS
@@ -21,10 +21,11 @@
 
 ### ***Getting Started***
 
-##### Enter the website and choose start.
-##### Select how many players that wants to play.
-##### The game board will be shown for you so you can play.
-##### Click the dice to play.
+##### Thinking and writing the game idea.
+##### Making the readme.md file.
+##### Writing the pseudocode for the game.
+##### Designing the game wireframe.
+##### Approving the project idea.
 ##### The project will be deployed soon.
 ***
 
@@ -40,7 +41,7 @@
 ### ***Future Updates***
 
 - [ ] Make the game support multiplayers.
-- [x] ~~Completed~~ Project Requirements
+- [ ] Complete Project Requirements
 ***
 
 ### ***Credits***
