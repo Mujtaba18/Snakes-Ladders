@@ -69,9 +69,15 @@ function movePiece(moves) {
     let row = Math.floor(currentPosition / boardGrid);
     let col = currentPosition % boardGrid;
 
+    let cellsToWin = 0 + currentPosition;
+
     if (isFirstMove) {
         moves--;
         isFirstMove = false;
+    }
+    
+    if (moves > cellsToWin) {
+        return;
     }
 
     for (let i = 0; i < moves; i++) {
@@ -96,20 +102,10 @@ function movePiece(moves) {
         }
     }
 
-    if (snakes[currentPosition]) {
-        currentPosition = snakes[currentPosition];
-    }
-    else if (ladders[currentPosition]) {
-        currentPosition = ladders[currentPosition];
-    }
-
-    if (document.querySelector("#cell-0-0").querySelector(".piece")) {
-        alert('Congratulations!!');
-    }
-
     currentPosition = row * boardGrid + col;
 
     const cellId = `cell-${row}-${col}`;
+
     if (snakes[cellId]) {
         currentPosition = parseCellId(snakes[cellId]);
     } else if (ladders[cellId]) {
@@ -119,7 +115,13 @@ function movePiece(moves) {
     const newRow = Math.floor(currentPosition / boardGrid);
     const newCol = currentPosition % boardGrid;
     const newCell = document.querySelector(`#cell-${newRow}-${newCol}`);
-    if (newCell) {
+
+    console.log(currentPosition);
+    if (currentPosition === 0) {
+        newCell.appendChild(circle);
+        alert('Congratulations!');
+    }
+    else if (newCell) {
         newCell.appendChild(circle);
     }
 }
