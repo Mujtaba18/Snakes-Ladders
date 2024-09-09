@@ -53,16 +53,38 @@ for (let row = 0; row < boardGrid; row++) {
 }
 
 function rollDice() {
-    const randomNum = Math.floor(Math.random() * 6) + 1;
+    const finalNumber = Math.floor(Math.random() * 6) + 1;
+    // console.log(`Rolled Dice Number: ${randomNum}`);
+    let currentDice = 1;
 
-    dices.forEach(dice => {
-        dice.style.display = 'none';
-    });
 
-    const activeDice = document.querySelector(`#gameDice${randomNum}`);
-    activeDice.style.display = 'block';
+    function showDiceImages(number) {
+        dices.forEach(dice => {
+            dice.style.display = 'none';
+        });
+        const activeDice = document.querySelector(`#gameDice${number}`);
+        if (activeDice) {
+            activeDice.style.display = 'block';
+        }
+    }
 
-    movePiece(randomNum);
+    const interval = setInterval(() => {
+        showDiceImages(currentDice);
+
+        currentDice++;
+        if (currentDice > 6) {
+            currentDice = 1;
+        }
+    }, 100);
+
+    setTimeout(() => {
+        clearInterval(interval);
+        showDiceImages(finalNumber);
+
+
+        movePiece(finalNumber);
+    }, 700)
+
 }
 
 function movePiece(moves) {
@@ -75,7 +97,7 @@ function movePiece(moves) {
         moves--;
         isFirstMove = false;
     }
-    
+
     if (moves > cellsToWin) {
         return;
     }
@@ -131,6 +153,6 @@ function parseCellId(cellId) {
     return row * boardGrid + col;
 }
 
-
-
-diceButton.addEventListener('click', rollDice);
+dices.forEach(dice => {
+    dice.addEventListener('click', rollDice);
+});

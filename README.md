@@ -47,6 +47,7 @@
 ### ***Credits***
 
 ##### Game Images: [DuckDuckGo Search](http://www.duckduckgo.com)
+##### Game Image Source: [Gameosity](https://www.gameosity.com/2016/04/01/the-hisstory-of-snakes-and-ladders/)
 
 ##### Markdown Guide: [ia.net](https://ia.net/writer/support/general/markdown-guide)
 
