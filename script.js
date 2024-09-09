@@ -11,16 +11,18 @@ const diceButton = document.querySelector('#rollDice');
 let currentPosition = 9 * boardGrid;
 let circle = null;
 
-let players = [
-    { position: 9 * boardGrid, circle: null, id: 'player1' },
-    { position: 9 * boardGrid, circle: null, id: 'player2' },
-    { position: 9 * boardGrid, circle: null, id: 'player3' },
-    { position: 9 * boardGrid, circle: null, id: 'player4' }
-];
+const fading = document.querySelector('#fadingScreen');
+const whosTurnMsg = document.querySelector('#whosTurnMsg');
+
+const pieces = document.querySelector('.piece');
 
 let currentPlayerNum = 0;
-
-let isFirstMove = true;
+let players = [
+    { position: 9 * boardGrid, circle: null, id: 'player1', isFirstMove: true },
+    { position: 9 * boardGrid, circle: null, id: 'player2', isFirstMove: true },
+    { position: 9 * boardGrid, circle: null, id: 'player3', isFirstMove: true },
+    { position: 9 * boardGrid, circle: null, id: 'player4', isFirstMove: true }
+];
 
 const snakes = {
     'cell-0-3': 'cell-2-1',
@@ -53,13 +55,31 @@ for (let row = 0; row < boardGrid; row++) {
         cell.style.top = `${cellpadding + row * cellWidth}%`;
 
         boardBox.appendChild(cell);
-
-        if (row === 9 && col === 0) {
-            circle = document.createElement('div');
-            circle.classList.add('piece');
-            cell.appendChild(circle);
-        }
     }
+}
+
+players.forEach((player, index) => {
+    const firstCell = document.querySelector('#cell-9-0');
+    player.circle = document.createElement('div');
+    player.circle.classList.add('piece');
+    player.circle.classList.add(`player${index + 1}`);
+    firstCell.appendChild(player.circle);
+});
+
+function whichPlayerTurn() {
+    whosTurnMsg.textContent = `Player ${currentPlayerNum + 1} Turn`;
+    boardBox.classList.add('fading');
+    fading.classList.add('show');
+
+    setTimeout(() => {
+        fading.classList.remove('show');
+        boardBox.classList.remove('fading');
+    }, 1000);
+}
+
+function updatePlayerTurn() {
+    currentPlayerNum = (currentPlayerNum + 1) % players.length;
+    whichPlayerTurn();
 }
 
 function rollDice() {
@@ -98,14 +118,15 @@ function rollDice() {
 }
 
 function movePiece(moves) {
-    let row = Math.floor(currentPosition / boardGrid);
-    let col = currentPosition % boardGrid;
+    const player = players[currentPlayerNum];
+    let row = Math.floor(player.position / boardGrid);
+    let col = player.position % boardGrid;
 
-    let cellsToWin = 0 + currentPosition;
+    let cellsToWin = 0 + player.position;
 
-    if (isFirstMove) {
+    if (player.isFirstMove) {
         moves--;
-        isFirstMove = false;
+        player.isFirstMove = false;
     }
 
     if (moves > cellsToWin) {
@@ -134,28 +155,30 @@ function movePiece(moves) {
         }
     }
 
-    currentPosition = row * boardGrid + col;
+    player.position = row * boardGrid + col;
 
     const cellId = `cell-${row}-${col}`;
 
     if (snakes[cellId]) {
-        currentPosition = parseCellId(snakes[cellId]);
+        player.position = parseCellId(snakes[cellId]);
     } else if (ladders[cellId]) {
-        currentPosition = parseCellId(ladders[cellId]);
+        player.position = parseCellId(ladders[cellId]);
     }
 
-    const newRow = Math.floor(currentPosition / boardGrid);
-    const newCol = currentPosition % boardGrid;
+    const newRow = Math.floor(player.position / boardGrid);
+    const newCol = player.position % boardGrid;
     const newCell = document.querySelector(`#cell-${newRow}-${newCol}`);
 
-    console.log(currentPosition);
-    if (currentPosition === 0) {
-        newCell.appendChild(circle);
-        alert('Congratulations!');
+    // console.log(player.position);
+    if (player.position === 0) {
+        newCell.appendChild(player.circle);
+        alert(`${player.id} Wins!!`);
     }
     else if (newCell) {
-        newCell.appendChild(circle);
+        newCell.appendChild(player.circle);
     }
+
+    updatePlayerTurn();
 }
 
 function parseCellId(cellId) {
@@ -166,3 +189,6 @@ function parseCellId(cellId) {
 dices.forEach(dice => {
     dice.addEventListener('click', rollDice);
 });
+
+whichPlayerTurn();
+
