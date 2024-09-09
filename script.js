@@ -10,6 +10,16 @@ const diceButton = document.querySelector('#rollDice');
 
 let currentPosition = 9 * boardGrid;
 let circle = null;
+
+let players = [
+    { position: 9 * boardGrid, circle: null, id: 'player1' },
+    { position: 9 * boardGrid, circle: null, id: 'player2' },
+    { position: 9 * boardGrid, circle: null, id: 'player3' },
+    { position: 9 * boardGrid, circle: null, id: 'player4' }
+];
+
+let currentPlayerNum = 0;
+
 let isFirstMove = true;
 
 const snakes = {
