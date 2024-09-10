@@ -121,6 +121,7 @@ function updatePlayerTurn() {
 }
 
 function showPlayAgain() {
+    if (numOfPlayers !== '1') {
         whosTurnMsg.innerHTML = `You got 6!! \n One more chance..`;
         boardBox.classList.add('fading');
         fading.classList.add('show');
@@ -129,6 +130,7 @@ function showPlayAgain() {
             fading.classList.remove('show');
             boardBox.classList.remove('fading');
         }, 1000);
+    }
 }
 
 function rollDice() {
