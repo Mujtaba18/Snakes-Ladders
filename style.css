@@ -7,14 +7,18 @@ body {
     flex-direction: column;
     align-items: center;
 }
+
 header {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 header h1 {
-    color: rgb(50, 49, 49);;
+    color: rgb(50, 49, 49);
+    ;
 }
+
 #players {
     margin-top: -10px;
 
@@ -23,6 +27,7 @@ header h1 {
     justify-content: center;
     align-items: center;
 }
+
 #players div {
     margin: 0 10px;
 
@@ -31,29 +36,35 @@ header h1 {
     align-items: center;
     justify-content: center;
 }
+
 #players div h4 {
     margin-bottom: 0;
 }
+
 #boardBox {
     height: 60vh;
     width: 75vw;
     position: relative;
     max-width: 600px;
 }
+
 #gameBoard {
     height: 100%;
     width: 100%;
     border-radius: 18px;
 }
+
 .gameDice {
     height: 11vh;
     margin-top: 10px;
     display: none;
     cursor: pointer;
 }
+
 #gameDice4 {
     display: unset;
 }
+
 .cell {
     position: absolute;
     box-sizing: border-box;
@@ -66,52 +77,61 @@ header h1 {
     justify-content: center;
     align-items: center;
 }
+
 #linkToGame {
     cursor: pointer;
     background-color: rgb(205, 201, 193);
     border: 4px solid rgb(50, 49, 49);
-    color: rgb(50, 49, 49);;
+    color: rgb(50, 49, 49);
     border-radius: 5px;
     width: 140px;
     height: 60px;
     font-size: 20px;
     font-weight: 600;
 }
+
 #linkToGame:hover {
     background-color: rgb(50, 49, 49);
     border-color: rgb(205, 201, 193);
-    color: rgb(205, 201, 193);;
+    color: rgb(205, 201, 193);
 }
+
 footer {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-top: 10px;
 }
+
 .piece {
     width: 50%;
     height: 60%;
     border-radius: 50%;
     border: 2px solid black;
 }
+
 .player1 {
     background-color: rgba(255, 5, 5, 0.8);
 }
+
 .player2 {
     background-color: rgba(5, 59, 255, 0.8);
 }
+
 .player3 {
     background-color: rgba(250, 155, 2, 1);
 }
+
 .player4 {
     background-color: rgba(52, 210, 8, 1);
 }
+
 #fadingScreen {
     position: fixed;
     background-color: rgba(183, 185, 156, 0.8);
     width: 100%;
     height: 100%;
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -123,27 +143,85 @@ footer {
     top: 0;
     left: 0;
 }
+
 #fadingScreen h2 {
     color: rgb(27, 26, 26);
     font-size: 48px;
 }
+
 #fadingScreen.show {
     visibility: visible;
     opacity: 1;
 }
+
 #player1 h4 {
     color: rgba(255, 5, 5, 1);
 }
+
 #player2 h4 {
     color: rgba(5, 59, 255, 1);
 }
+
 #player3 h4 {
     color: rgba(250, 155, 2, 1);
 }
+
 #player4 h4 {
     color: rgba(52, 210, 8, 1);
 }
+
 .fading {
     opacity: 0.5;
     transition: opacity 0.5s ease;
+}
+
+#bodyStart {
+    justify-content: space-between;
+}
+
+#mainStart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sectionStart fieldset {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 80px;
+    margin-top: -100px;
+    width: 530px;
+    height: 80px;
+    font-size: 20px;
+    border-radius: 5px;
+    border: 4px solid rgb(50, 49, 49);
+}
+
+input {
+    appearance: none;
+    border-radius: 10px;
+    width: 10px;
+    height: 28px;
+    border: 2px solid #999;
+    transition: 0.2s all linear;
+    margin-right: 5px;
+}
+
+input:checked {
+    border: 6px solid rgb(50, 49, 49);
+}
+
+legend {
+    color: rgb(50, 49, 49);
+    margin-left: 59px;
+    border-radius: 0;
+    border: 0;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 0 15px;
+}
+
+label {
+    color: rgb(50, 49, 49);
 }
