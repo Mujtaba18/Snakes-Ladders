@@ -12,6 +12,9 @@ header {
     flex-direction: column;
     align-items: center;
 }
+header h1 {
+    color: rgb(50, 49, 49);;
+}
 #players {
     margin-top: -10px;
 
@@ -63,17 +66,21 @@ header {
     justify-content: center;
     align-items: center;
 }
-#rollDice {
+#linkToGame {
     cursor: pointer;
-    background-color: rgb(242, 242, 242);
-    border: 3px solid black;
+    background-color: rgb(205, 201, 193);
+    border: 4px solid rgb(50, 49, 49);
+    color: rgb(50, 49, 49);;
     border-radius: 5px;
-    width: 80px;
-    height: 30px;
-    margin-left: 30px;
+    width: 140px;
+    height: 60px;
+    font-size: 20px;
+    font-weight: 600;
 }
-#rollDice:hover {
-    background-color: rgb(210, 210, 210);
+#linkToGame:hover {
+    background-color: rgb(50, 49, 49);
+    border-color: rgb(205, 201, 193);
+    color: rgb(205, 201, 193);;
 }
 footer {
     display: flex;

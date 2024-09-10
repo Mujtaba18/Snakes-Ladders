@@ -186,6 +186,10 @@ function parseCellId(cellId) {
     return row * boardGrid + col;
 }
 
+function linkToGame () {
+    location.href = 'game.html';
+}
+
 dices.forEach(dice => {
     dice.addEventListener('click', rollDice);
 });
