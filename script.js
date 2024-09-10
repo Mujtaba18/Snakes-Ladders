@@ -61,14 +61,39 @@ for (let row = 0; row < boardGrid; row++) {
     }
 }
 
-players.forEach((player, index) => {
+if (numOfPlayers === '1') {
+    players = players.map((player, num) => {
+        if (num !== 0) {
+            player.hidden = true;
+        }
+        return player;
+    });
+} else if (numOfPlayers === '2') {
+    players = players.map((player, num) => {
+        if (num !== 0 && num !== 1) {
+            player.hidden = true;
+        }
+        return player;
+    });
+} else if (numOfPlayers === '3') {
+    players = players.map((player, num) => {
+        if (num === 3) {
+            player.hidden = true;
+        }
+        return player;
+    });
+} else {
+    players.forEach(player => player.hidden = false);
+}
 
+players.forEach((player, index) => {
+    if (!player.hidden) {
         const firstCell = document.querySelector('#cell-9-0');
         player.circle = document.createElement('div');
         player.circle.classList.add('piece');
         player.circle.classList.add(`player${index + 1}`);
         firstCell.appendChild(player.circle);
-    
+    }
 });
 
 function whichPlayerTurn() {
