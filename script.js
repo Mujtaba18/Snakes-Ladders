@@ -97,18 +97,23 @@ players.forEach((player, index) => {
 });
 
 function whichPlayerTurn() {
-    whosTurnMsg.textContent = `Player ${currentPlayerNum + 1} Turn`;
-    boardBox.classList.add('fading');
-    fading.classList.add('show');
-
-    setTimeout(() => {
-        fading.classList.remove('show');
-        boardBox.classList.remove('fading');
-    }, 1000);
+    if (numOfPlayers !== '1') {
+        whosTurnMsg.textContent = `Player ${currentPlayerNum + 1} Turn`;
+        boardBox.classList.add('fading');
+        fading.classList.add('show');
+        
+        setTimeout(() => {
+            fading.classList.remove('show');
+            boardBox.classList.remove('fading');
+        }, 1000);
+    }
 }
 
 function updatePlayerTurn() {
     currentPlayerNum = (currentPlayerNum + 1) % players.length;
+    while (players[currentPlayerNum].hidden) {
+        currentPlayerNum = (currentPlayerNum + 1) % players.length;
+    }
     whichPlayerTurn();
 }
 
