@@ -161,6 +161,8 @@ function rollDice() {
 
         if (finalNumber !== 6) {
             updatePlayerTurn();
+        } else {
+            showPlayAgain();
         }
     }, 700)
 
