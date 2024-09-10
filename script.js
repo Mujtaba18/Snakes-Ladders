@@ -101,7 +101,7 @@ function whichPlayerTurn() {
         whosTurnMsg.textContent = `Player ${currentPlayerNum + 1} Turn`;
         boardBox.classList.add('fading');
         fading.classList.add('show');
-        
+
         setTimeout(() => {
             fading.classList.remove('show');
             boardBox.classList.remove('fading');
@@ -110,11 +110,22 @@ function whichPlayerTurn() {
 }
 
 function updatePlayerTurn() {
-    currentPlayerNum = (currentPlayerNum + 1) % players.length;
-    while (players[currentPlayerNum].hidden) {
         currentPlayerNum = (currentPlayerNum + 1) % players.length;
-    }
-    whichPlayerTurn();
+        while (players[currentPlayerNum].hidden) {
+            currentPlayerNum = (currentPlayerNum + 1) % players.length;
+        }
+        whichPlayerTurn();
+}
+
+function showPlayAgain() {
+        whosTurnMsg.textContent = `You got 6!! One more chance..`;
+        boardBox.classList.add('fading');
+        fading.classList.add('show');
+
+        setTimeout(() => {
+            fading.classList.remove('show');
+            boardBox.classList.remove('fading');
+        }, 1000);
 }
 
 function rollDice() {
@@ -146,8 +157,11 @@ function rollDice() {
         clearInterval(interval);
         showDiceImages(finalNumber);
 
-
         movePiece(finalNumber);
+
+        if (finalNumber !== 6) {
+            updatePlayerTurn();
+        }
     }, 700)
 
 }
@@ -213,7 +227,6 @@ function movePiece(moves) {
         newCell.appendChild(player.circle);
     }
 
-    updatePlayerTurn();
 }
 
 function parseCellId(cellId) {
