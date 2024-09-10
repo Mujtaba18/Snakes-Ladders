@@ -84,7 +84,7 @@ function updatePlayerTurn() {
 
 function rollDice() {
     const finalNumber = Math.floor(Math.random() * 6) + 1;
-    // console.log(`Rolled Dice Number: ${randomNum}`);
+    // console.log(`Rolled Dice Number: ${finalNumber}`);
     let currentDice = 1;
 
 
