@@ -16,6 +16,9 @@ const whosTurnMsg = document.querySelector('#whosTurnMsg');
 
 const pieces = document.querySelector('.piece');
 
+const getPlayer = new URLSearchParams(window.location.search);
+const numOfPlayers = getPlayer.get('Player');
+
 let currentPlayerNum = 0;
 let players = [
     { position: 9 * boardGrid, circle: null, id: 'player1', isFirstMove: true },
@@ -59,11 +62,13 @@ for (let row = 0; row < boardGrid; row++) {
 }
 
 players.forEach((player, index) => {
-    const firstCell = document.querySelector('#cell-9-0');
-    player.circle = document.createElement('div');
-    player.circle.classList.add('piece');
-    player.circle.classList.add(`player${index + 1}`);
-    firstCell.appendChild(player.circle);
+
+        const firstCell = document.querySelector('#cell-9-0');
+        player.circle = document.createElement('div');
+        player.circle.classList.add('piece');
+        player.circle.classList.add(`player${index + 1}`);
+        firstCell.appendChild(player.circle);
+    
 });
 
 function whichPlayerTurn() {
@@ -186,8 +191,16 @@ function parseCellId(cellId) {
     return row * boardGrid + col;
 }
 
-function linkToGame () {
-    location.href = 'game.html';
+function linkToGame() {
+    if (document.getElementById("Player-1-btn").checked === true) {
+        location.href = 'game.html?Player=1';
+    } else if (document.getElementById("Player-2-btn").checked === true) {
+        location.href = 'game.html?Player=2';
+    } else if (document.getElementById("Player-3-btn").checked === true) {
+        location.href = 'game.html?Player=3';
+    } else {
+        location.href = 'game.html?Player=4';
+    }
 }
 
 dices.forEach(dice => {
