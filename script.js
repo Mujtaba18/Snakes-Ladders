@@ -21,10 +21,10 @@ const numOfPlayers = getPlayer.get('Player');
 
 let currentPlayerNum = 0;
 let players = [
-    { position: 9 * boardGrid, circle: null, id: 'player1', isFirstMove: true },
-    { position: 9 * boardGrid, circle: null, id: 'player2', isFirstMove: true },
-    { position: 9 * boardGrid, circle: null, id: 'player3', isFirstMove: true },
-    { position: 9 * boardGrid, circle: null, id: 'player4', isFirstMove: true }
+    { position: 9 * boardGrid, circle: null, id: 'player1', isFirstMove: true, wins: 0 },
+    { position: 9 * boardGrid, circle: null, id: 'player2', isFirstMove: true, wins: 0 },
+    { position: 9 * boardGrid, circle: null, id: 'player3', isFirstMove: true, wins: 0 },
+    { position: 9 * boardGrid, circle: null, id: 'player4', isFirstMove: true, wins: 0 }
 ];
 
 const snakes = {
@@ -228,12 +228,20 @@ function movePiece(moves) {
     // console.log(player.position);
     if (player.position === 0) {
         newCell.appendChild(player.circle);
+        player.wins++;
+        let getWins = document.getElementById('wins');
+        getWins.innerText = player.wins;
         alert(`${player.id} Wins!!`);
     }
     else if (newCell) {
         newCell.appendChild(player.circle);
     }
 
+    function winEasy () {
+        player.position = 1; 
+    }
+    
+    winEasy();
 }
 
 function parseCellId(cellId) {
@@ -252,6 +260,8 @@ function linkToGame() {
         location.href = 'game.html?Player=4';
     }
 }
+
+
 
 dices.forEach(dice => {
     dice.addEventListener('click', rollDice);
