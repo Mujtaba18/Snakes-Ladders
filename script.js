@@ -87,12 +87,15 @@ if (numOfPlayers === '1') {
 }
 
 players.forEach((player, index) => {
+    const playersNum = document.getElementById(player.id);
     if (!player.hidden) {
         const firstCell = document.querySelector('#cell-9-0');
         player.circle = document.createElement('div');
         player.circle.classList.add('piece');
         player.circle.classList.add(`player${index + 1}`);
         firstCell.appendChild(player.circle);
+    } else {
+        playersNum.style.display = 'none';   
     }
 });
 
@@ -118,7 +121,7 @@ function updatePlayerTurn() {
 }
 
 function showPlayAgain() {
-        whosTurnMsg.textContent = `You got 6!! One more chance..`;
+        whosTurnMsg.innerHTML = `You got 6!! \n One more chance..`;
         boardBox.classList.add('fading');
         fading.classList.add('show');
 

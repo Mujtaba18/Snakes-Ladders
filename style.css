@@ -29,7 +29,7 @@ header h1 {
 }
 
 #players div {
-    margin: 0 10px;
+    margin: 0 40px;
 
     display: flex;
     flex-direction: column;
