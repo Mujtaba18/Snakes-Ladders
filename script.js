@@ -24,10 +24,10 @@ let cheatPosition = 0;
 
 let currentPlayerNum = 0;
 let players = [
-    { position: 9 * boardGrid, circle: null, id: 'player1', name: 'Player 1', isFirstMove: true, wins: 0 },
-    { position: 9 * boardGrid, circle: null, id: 'player2', name: 'Player 2', isFirstMove: true, wins: 0 },
-    { position: 9 * boardGrid, circle: null, id: 'player3', name: 'Player 3', isFirstMove: true, wins: 0 },
-    { position: 9 * boardGrid, circle: null, id: 'player4', name: 'Player 4', isFirstMove: true, wins: 0 }
+    { position: 9 * boardGrid, circle: null, id: 'player1', name: 'Player 1', isFirstMove: true, wins: 0, won: false },
+    { position: 9 * boardGrid, circle: null, id: 'player2', name: 'Player 2', isFirstMove: true, wins: 0, won: false },
+    { position: 9 * boardGrid, circle: null, id: 'player3', name: 'Player 3', isFirstMove: true, wins: 0, won: false },
+    { position: 9 * boardGrid, circle: null, id: 'player4', name: 'Player 4', isFirstMove: true, wins: 0, won: false }
 ];
 
 const snakes = {
@@ -103,7 +103,7 @@ players.forEach((player, index) => {
 });
 
 function whichPlayerTurn() {
-    if (numOfPlayers !== '1') {
+    if (numOfPlayers !== '1'|| players[currentPlayerNum].wins === 1) {
         whosTurnMsg.textContent = `Player ${currentPlayerNum + 1} Turn`;
         boardBox.classList.add('fading');
         fading.classList.add('show');
@@ -117,7 +117,7 @@ function whichPlayerTurn() {
 
 function updatePlayerTurn() {
     currentPlayerNum = (currentPlayerNum + 1) % players.length;
-    while (players[currentPlayerNum].hidden) {
+    while (players[currentPlayerNum].hidden || players[currentPlayerNum].wins === 1) {
         currentPlayerNum = (currentPlayerNum + 1) % players.length;
     }
     whichPlayerTurn();
@@ -172,6 +172,7 @@ function rollDice() {
         } else {
             showPlayAgain();
         }
+
     }, 700)
 
 }
@@ -227,18 +228,26 @@ function movePiece(moves) {
     const newRow = Math.floor(player.position / boardGrid);
     const newCol = player.position % boardGrid;
     const newCell = document.querySelector(`#cell-${newRow}-${newCol}`);
-    
+
     if (player.position === 0) {
         newCell.appendChild(player.circle);
         player.wins++;
         let getWins = document.getElementById(`wins-${player.id}`);
         getWins.innerText = player.wins;
+
+        player.won = true;
+        updatePlayerTurn();
         alert(`${player.name} Wins!!`);
+
+        return;
     }
     else if (newCell) {
         newCell.appendChild(player.circle);
     }
 
+    // if (players.every(play => play.wins >= 1)) {
+    //     alert("Game Over!!");
+    // }
 }
 
 function parseCellId(cellId) {
@@ -258,7 +267,7 @@ function linkToGame() {
     }
 }
 
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function (e) {
     const key = e.key.toLowerCase();
     console.log(e.key);
 
