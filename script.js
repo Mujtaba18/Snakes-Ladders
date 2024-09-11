@@ -19,12 +19,15 @@ const pieces = document.querySelector('.piece');
 const getPlayer = new URLSearchParams(window.location.search);
 const numOfPlayers = getPlayer.get('Player');
 
+let cheat = 'win';
+let cheatPosition = 0;
+
 let currentPlayerNum = 0;
 let players = [
-    { position: 9 * boardGrid, circle: null, id: 'player1', isFirstMove: true, wins: 0 },
-    { position: 9 * boardGrid, circle: null, id: 'player2', isFirstMove: true, wins: 0 },
-    { position: 9 * boardGrid, circle: null, id: 'player3', isFirstMove: true, wins: 0 },
-    { position: 9 * boardGrid, circle: null, id: 'player4', isFirstMove: true, wins: 0 }
+    { position: 9 * boardGrid, circle: null, id: 'player1', name: 'Player 1', isFirstMove: true, wins: 0 },
+    { position: 9 * boardGrid, circle: null, id: 'player2', name: 'Player 2', isFirstMove: true, wins: 0 },
+    { position: 9 * boardGrid, circle: null, id: 'player3', name: 'Player 3', isFirstMove: true, wins: 0 },
+    { position: 9 * boardGrid, circle: null, id: 'player4', name: 'Player 4', isFirstMove: true, wins: 0 }
 ];
 
 const snakes = {
@@ -95,7 +98,7 @@ players.forEach((player, index) => {
         player.circle.classList.add(`player${index + 1}`);
         firstCell.appendChild(player.circle);
     } else {
-        playersNum.style.display = 'none';   
+        playersNum.style.display = 'none';
     }
 });
 
@@ -113,11 +116,11 @@ function whichPlayerTurn() {
 }
 
 function updatePlayerTurn() {
+    currentPlayerNum = (currentPlayerNum + 1) % players.length;
+    while (players[currentPlayerNum].hidden) {
         currentPlayerNum = (currentPlayerNum + 1) % players.length;
-        while (players[currentPlayerNum].hidden) {
-            currentPlayerNum = (currentPlayerNum + 1) % players.length;
-        }
-        whichPlayerTurn();
+    }
+    whichPlayerTurn();
 }
 
 function showPlayAgain() {
@@ -216,7 +219,7 @@ function movePiece(moves) {
     const cellId = `cell-${row}-${col}`;
 
     if (snakes[cellId]) {
-        player.position = parseCellId(snakes[cellId]);
+        // player.position = parseCellId(snakes[cellId]);
     } else if (ladders[cellId]) {
         player.position = parseCellId(ladders[cellId]);
     }
@@ -231,17 +234,12 @@ function movePiece(moves) {
         player.wins++;
         let getWins = document.getElementById('wins');
         getWins.innerText = player.wins;
-        alert(`${player.id} Wins!!`);
+        alert(`${player.name} Wins!!`);
     }
     else if (newCell) {
         newCell.appendChild(player.circle);
     }
 
-    function winEasy () {
-        player.position = 1; 
-    }
-    
-    winEasy();
 }
 
 function parseCellId(cellId) {
@@ -261,7 +259,37 @@ function linkToGame() {
     }
 }
 
+document.addEventListener('keydown', function(e) {
+    const key = e.key.toLowerCase();
+    console.log(e.key);
 
+    if (key === cheat[cheatPosition]) {
+        cheatPosition++;
+
+        if (cheatPosition === cheat.length) {
+            win();
+            cheatPosition = 0;
+        }
+    } else {
+        cheatPosition = 0;
+    }
+});
+
+function win() {
+    console.log('Cheat code Active!!')
+    const player = players[currentPlayerNum];
+
+    player.position = 0;
+
+    const newPlace = document.querySelector('#cell-0-0');
+    newPlace.appendChild(player.circle);
+
+    player.wins++;
+    let getWins = document.getElementById('wins');
+    getWins.innerText = player.wins;
+
+    alert(`${player.name} Wins !!`)
+}
 
 dices.forEach(dice => {
     dice.addEventListener('click', rollDice);
