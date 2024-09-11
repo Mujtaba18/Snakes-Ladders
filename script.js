@@ -219,7 +219,7 @@ function movePiece(moves) {
     const cellId = `cell-${row}-${col}`;
 
     if (snakes[cellId]) {
-        // player.position = parseCellId(snakes[cellId]);
+        player.position = parseCellId(snakes[cellId]);
     } else if (ladders[cellId]) {
         player.position = parseCellId(ladders[cellId]);
     }
@@ -227,12 +227,11 @@ function movePiece(moves) {
     const newRow = Math.floor(player.position / boardGrid);
     const newCol = player.position % boardGrid;
     const newCell = document.querySelector(`#cell-${newRow}-${newCol}`);
-
-    // console.log(player.position);
+    
     if (player.position === 0) {
         newCell.appendChild(player.circle);
         player.wins++;
-        let getWins = document.getElementById('wins');
+        let getWins = document.getElementById(`wins-${player.id}`);
         getWins.innerText = player.wins;
         alert(`${player.name} Wins!!`);
     }
@@ -267,7 +266,7 @@ document.addEventListener('keydown', function(e) {
         cheatPosition++;
 
         if (cheatPosition === cheat.length) {
-            win();
+            winCheat();
             cheatPosition = 0;
         }
     } else {
@@ -275,8 +274,8 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-function win() {
-    console.log('Cheat code Active!!')
+function winCheat() {
+    console.log('Cheat Code Active!!')
     const player = players[currentPlayerNum];
 
     player.position = 0;
@@ -285,10 +284,9 @@ function win() {
     newPlace.appendChild(player.circle);
 
     player.wins++;
-    let getWins = document.getElementById('wins');
+    let getWins = document.getElementById(`wins-${player.id}`);
     getWins.innerText = player.wins;
-
-    alert(`${player.name} Wins !!`)
+    alert(`${player.name} Wins!!`);
 }
 
 dices.forEach(dice => {
